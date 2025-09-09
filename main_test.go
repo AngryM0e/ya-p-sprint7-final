@@ -46,6 +46,7 @@ func TestCafeWhenOk(t *testing.T) {
 		req := httptest.NewRequest("GET", v, nil)
 
 		handler.ServeHTTP(response, req)
+		assert.Equal(t, http.StatusOK, response.Code)
 	}
 }
 
@@ -113,7 +114,7 @@ func TestCafeSearch(t *testing.T) {
 		searchLower := strings.ToLower(v.search)
 		for _, cafe := range cafes {
 			cafeLower := strings.ToLower(cafe)
-			assert.True(t, strings.Contains(cafeLower, searchLower), "cafe %s should contain %s", cafe, v.search)
+			assert.Contains(t, cafeLower, searchLower, "cafe %s should contain %s", cafe, v.search)
 		}
 	}
 }
